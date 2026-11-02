@@ -91,7 +91,7 @@ async function request<T>(path: string, options?: RequestInit): Promise<T> {
   return response.json() as Promise<T>;
 }
 
-// ── Services ──────────────────────────────────────────────────────────────────
+// ── Services ───────────────────────────────────────────────────────────
 
 export const getServices = (tag?: string, status?: string) => {
   const params = new URLSearchParams();
@@ -112,7 +112,7 @@ export const updateService = (id: number, payload: ServiceUpdate) =>
 export const deleteService = (id: number) =>
   request<void>(`/api/services/${id}`, { method: 'DELETE' });
 
-// ── Checks ────────────────────────────────────────────────────────────────────
+// ── Checks ────────────────────────────────────────────────────────────
 
 export const runCheck = (serviceId: number) =>
   request<Check>(`/api/services/${serviceId}/checks`, { method: 'POST' });
@@ -123,12 +123,12 @@ export const runAllChecks = () =>
 export const getChecks = (serviceId: number, limit = 50) =>
   request<Check[]>(`/api/services/${serviceId}/checks?limit=${limit}`);
 
-// ── Uptime ────────────────────────────────────────────────────────────────────
+// ── Uptime ────────────────────────────────────────────────────────────
 
 export const getUptimeHistory = (serviceId: number, days = 30) =>
   request<UptimeDayBucket[]>(`/api/services/${serviceId}/uptime/history?days=${days}`);
 
-// ── Incidents ─────────────────────────────────────────────────────────────────
+// ── Incidents ──────────────────────────────────────────────────────────
 
 export const getIncidents = (state?: 'open' | 'resolved', serviceId?: number, limit = 50) => {
   const params = new URLSearchParams();
@@ -138,6 +138,6 @@ export const getIncidents = (state?: 'open' | 'resolved', serviceId?: number, li
   return request<Incident[]>(`/api/incidents?${params.toString()}`);
 };
 
-// ── Stats ─────────────────────────────────────────────────────────────────────
+// ── Stats ─────────────────────────────────────────────────────────────
 
 export const getStats = () => request<Stats>('/api/stats');
